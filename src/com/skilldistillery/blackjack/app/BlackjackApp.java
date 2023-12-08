@@ -14,5 +14,6 @@ public class BlackjackApp {
 	public void run() {
 		Player p = new Player();
 		Dealer d = new Dealer();
+		d.startGame();
 	}
 }

@@ -1,8 +1,13 @@
 package com.skilldistillery.blackjack.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Hand {
+	protected List<Card> myCards = new ArrayList<>();
 
-	protected List<Card> cards;
+	public List<Card> CardsInHand(Card Card) {
+		myCards.add(Card);
+		return myCards;
+	}
 }

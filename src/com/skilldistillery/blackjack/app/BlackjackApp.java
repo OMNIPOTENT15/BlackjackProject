@@ -1,18 +1,16 @@
 package com.skilldistillery.blackjack.app;
 
 import com.skilldistillery.blackjack.entities.Dealer;
-import com.skilldistillery.blackjack.entities.Player;
 
 public class BlackjackApp {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 
 		BlackjackApp bja = new BlackjackApp();
 		bja.run();
 	}
 
-	public void run() {
-		Player p = new Player();
+	public void run() throws InterruptedException {
 		Dealer d = new Dealer();
 		d.startGame();
 	}

@@ -5,14 +5,14 @@ import java.util.List;
 public class Player extends Hand {
 
 	List<Card> myCurrentCards = myCards;
+	protected int playerWins;
 
-	public String countCards() {
-		int currentVal = 0;
+	public String viewCards(List<Card> myCurrentCards) {
+		String name = "";
 		for (Card card : myCurrentCards) {
-			currentVal += card.getValue();
+			name = card.toString();
 		}
-		return "Your card count is " + currentVal;
+		return name;
 	}
 
-	
 }

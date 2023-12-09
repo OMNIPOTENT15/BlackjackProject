@@ -6,52 +6,50 @@ public class Dealer extends Player {
 
 	Scanner sc = new Scanner(System.in);
 	private Deck deck = new Deck();
+	BlackjackHand blackjackHand = new BlackjackHand();
+	Player player = new Player();
 
 	public void startGame() {
 		System.out.println("Welcome to Blackjack!");
-		System.out.println();
-		deck.shuffleDeck();
+		boolean playAgain = true;
 
-		Card playerFirstCard = dealingPlayersCard(deck.removeCard());
-		System.out.print("You drew a " + playerFirstCard.toString());
-		System.out.println(" Value is " + playerFirstCard.getValue());
-		Card playerSecondCard = dealingPlayersCard(deck.removeCard());
-		System.out.print("You drew a " + playerSecondCard.toString());
-		System.out.println(" Value is " + playerSecondCard.getValue());
-		int playerTotal = playerFirstCard.getValue() + playerSecondCard.getValue();
-		System.out.println("Current total card value " + playerTotal);
-		System.out.println();
+		Card playerFirstCard = null;
+		Card playerSecondCard = null;
+		Card dealersFirstCard = null;
+		Card dealersSecondCard = null;
+		int playerTotal = 0;
+		while (playAgain) {
+			deck.shuffleDeck();
+			deck.shuffleDeck();
+			System.out.println();
 
-		Card dealersFirstCard = dealDealersCard(deck.removeCard());
-//		System.out.println("Dealer drew a " + dealersFirstCard.toString());
-//		System.out.println("Value " + dealersFirstCard.getValue());
-		Card dealersSecondCard = dealDealersCard(deck.removeCard());
-		System.out.print("Dealer drew a " + dealersFirstCard.toString());
+			playerFirstCard = dealingPlayersCard(deck.removeCard());
+			System.out.print("You drew a " + playerFirstCard.toString());
+			System.out.println(" Value is " + playerFirstCard.getValue());
+			playerSecondCard = dealingPlayersCard(deck.removeCard());
+			System.out.print("You drew a " + playerSecondCard.toString());
+			System.out.println(" Value is " + playerSecondCard.getValue());
+			playerTotal = playerFirstCard.getValue() + playerSecondCard.getValue();
+			System.out.println("Your total card value " + playerTotal);
+			System.out.println();
 
-		int dealerTotal = dealersFirstCard.getValue() + dealersSecondCard.getValue();
-//		System.out.println("Total card value " + dealerTotal);
-//		System.out.println();
+			dealersFirstCard = dealingDealersCard(deck.removeCard());
+			dealersSecondCard = dealingDealersCard(deck.removeCard());
+			System.out.println("Dealer drew a " + dealersFirstCard.toString());
 
-		while (playerTotal <= 21 || dealerTotal <= 21)
+			int dealerTotal = dealersFirstCard.getValue() + dealersSecondCard.getValue();
 
-		{
 			if (playerTotal == 21) {
 				System.out.println();
-				System.out.println("Blackjack! Player 1 wins!");
-				break;
+				System.out.println("Blackjack! You win!");
+				playAgain = wouldYouLikeToPlayAgain();
 			} else if (dealerTotal == 21) {
-				System.out.println("Blackjack! Player 2 wins!");
-				break;
-
-			}
-			if (playerTotal > 21) {
-				System.out.println("Bust. Dealer wins!");
+				System.out.println();
+				System.out.println("Blackjack! Dealer wins!");
+				playAgain = wouldYouLikeToPlayAgain();
 			}
 
-			if (dealerTotal > 21) {
-				System.out.println("Bust. You win!");
-			}
-			if (playerTotal < 21) {
+			while (playerTotal < 21) {
 				System.out.println();
 				System.out.println();
 				System.out.println("Would you like to hit or stand? Type (1) for HIT, type (2) for STAND.");
@@ -59,53 +57,92 @@ public class Dealer extends Player {
 
 				if (choice == 1) {
 					Card newCard = hit();
+					dealingPlayersCard(newCard);
 					System.out.println("You drew a " + newCard.toString());
 					System.out.println("Card Value is " + newCard.getValue());
 					playerTotal += newCard.getValue();
-					System.out.println("Total card value is : " + playerTotal);
+					System.out.println("Your total card value is : " + playerTotal);
+					if (playerTotal > 21) {
+						System.out.println("You Busted. Dealer wins!");
+						playAgain = wouldYouLikeToPlayAgain();
+					}
+					if (playerTotal == 21) {
+						System.out.println();
+						System.out.println("Blackjack! You win!");
+						playAgain = wouldYouLikeToPlayAgain();
+					}
 				} else if (choice == 2) {
+
 					if (dealerTotal < 17) {
 						Card newCard = hit();
+						dealingDealersCard(newCard);
 						System.out.println("Dealer drew a " + dealersSecondCard.toString());
 						System.out.println("Dealer drew a " + newCard.toString());
 						dealerTotal += newCard.getValue();
-						System.out.println("Total Card Value is " + dealerTotal);
-						System.out.println(dealerTotal);
-					} else if (dealerTotal < playerTotal) {
-						System.out.println("You win!.");
-					} else {
-						System.out.println("Dealer wins!.");
+						System.out.println("Dealer total card value is " + dealerTotal);
+						if (dealerTotal > 21) {
+							System.out.println("Dealer Busted. You win!");
+							playAgain = wouldYouLikeToPlayAgain();
+						}
+						if (dealerTotal == 21) {
+							System.out.println("Blackjack! Dealer wins!");
+							playAgain = wouldYouLikeToPlayAgain();
+						}
+						if (dealerTotal >= 17 && dealerTotal < 21) {
+							System.out.println("Dealer drew a " + dealersSecondCard.toString());
+							System.out.println("Dealer Total Card is " + dealerTotal);
+							if (dealerTotal < playerTotal) {
+								System.out.println("Dealer total card value is " + dealerTotal);
+								System.out.println();
+								System.out.println("Your total card value is " + playerTotal);
+								System.out.println("You win!");
+								playAgain = wouldYouLikeToPlayAgain();
+							} else {
+								System.out.println("Dealer total card value is " + dealerTotal);
+								System.out.println();
+								System.out.println("Your total card value is " + playerTotal);
+								System.out.println("Dealer wins!");
+								playAgain = wouldYouLikeToPlayAgain();
+							}
+						}
 
 					}
+
 				} else {
 					System.out.println("Please enter a valid input.");
 				}
-				if (dealerTotal < 17) {
-					Card newCard = hit();
-					System.out.println("Dealer drew a " + dealersSecondCard.toString());
-					System.out.println("Dealer drew a " + newCard.toString());
-					System.out.println("Card Value is " + newCard.getValue());
-					dealerTotal += newCard.getValue();
-					System.out.println(dealerTotal);
-				} else {
-				}
-
 			}
 		}
+
 	}
 
 	public Card dealingPlayersCard(Card Card) {
-		CardsInHand(Card);
+		player.CardsInHand(Card);
 		return Card;
 	}
 
-	public Card dealDealersCard(Card Card) {
-		CardsInHand(Card);
+	public Card dealingDealersCard(Card Card) {
+		blackjackHand.CardsInHand(Card);
 		return Card;
 	}
 
 	public Card hit() {
 		Card newCard = deck.removeCard();
 		return newCard;
+	}
+
+	public boolean wouldYouLikeToPlayAgain() {
+		System.out.println();
+		System.out.println("Would you like to play again? (1) for yes, and (2) for no.");
+		int choice = sc.nextInt();
+		sc.nextLine();
+		if (choice == 1) {
+			return true;
+		} else if (choice == 2) {
+			System.out.println("Goodbye!");
+		} else {
+			System.out.println("Please choose a valid input.");
+		}
+		return true;
 	}
 }

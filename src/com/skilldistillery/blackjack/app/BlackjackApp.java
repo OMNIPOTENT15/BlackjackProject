@@ -36,69 +36,95 @@ public class BlackjackApp {
 		int userChoice = 0;
 		boolean keepGoing = true;
 		while (keepGoing) {
-
-			if (dealer.getPlayerHandValue() == dealer.getDealerHandValue()) {
+			if (dealer.getPlayerHandValue() == 21 && dealer.getDealerHandValue() == 21) {
+				System.out.println();
+				System.out.println(dealer.displayDealerCards());
+				System.out.println(dealer.displayDealerSecondCard());
 				System.out.println("Wow! Its a tie!");
 				keepGoing = false;
 				break;
-			} else if (dealer.getPlayerHandValue() == 21) {
-				System.out.println("Blackjack! You win!");
+
+			}
+			if (dealer.getPlayerHandValue() == 21) {
+				System.out.println();
+				System.out.println("Blackjack! Player wins!");
 				player.playerWins++;
 				keepGoing = false;
 				break;
-			} else if (dealer.getPlayerHandValue() > 21) {
-				System.out.println("You busted! Dealer wins!");
+
+			}
+			if (dealer.getPlayerHandValue() > 21) {
+				System.out.println();
+				System.out.println("Player busted! Dealer wins!");
 				dealer.dealerWins++;
 				keepGoing = false;
 				break;
-			} else if (dealer.getDealerHandValue() == 21) {
+			}
+			if (dealer.getDealerHandValue() == 21) {
+				System.out.println();
+				System.out.println(dealer.displayDealerCards());
+				System.out.println(dealer.displayDealerSecondCard());
 				System.out.println("Blackjack! Dealer wins!");
 				dealer.dealerWins++;
 				keepGoing = false;
 				break;
-			} else if (dealer.getDealerHandValue() > 21) {
-				System.out.println("Dealer busted! You win!");
+			}
+			if (dealer.getDealerHandValue() > 21) {
+				System.out.println();
+				System.out.println(dealer.displayDealerCards());
+				System.out.println(dealer.displayDealerSecondCard());
+				System.out.println("Dealer busted! Player wins!");
 				player.playerWins++;
 				keepGoing = false;
 				break;
 			}
-			try {
-				System.out.println("Please enter (1) for HIT, type (2) for STAND.");
-				userChoice = sc.nextInt();
-				if (userChoice == 1) {
-					System.out.println();
-					Card newCard = dealer.dealCard();
-					dealer.addPlayerCard(newCard);
-					System.out.println("Player new card: " + newCard + " - Value of " + newCard.getValue());
-					System.out.println("Player total: " + dealer.getPlayerHandValue());
-					if (dealer.getPlayerHandValue() == 21) {
-						System.out.println("Blackjack! You win!");
-						player.playerWins++;
+			while (dealer.getPlayerHandValue() < 21) {
+				try {
+					System.out.println("Please enter (1) for HIT, type (2) for STAND.");
+					userChoice = sc.nextInt();
+					sc.nextLine();
+					if (userChoice == 1) {
+						System.out.println();
+						Card newCard = dealer.dealCard();
+						dealer.addPlayerCard(newCard);
+						System.out.println("Player new card: " + newCard + " - Value of " + newCard.getValue());
+						System.out.println("Player total: " + dealer.getPlayerHandValue());
+						if (dealer.getPlayerHandValue() == 21) {
+							System.out.println("Blackjack! Player wins!");
+							player.playerWins++;
+							keepGoing = false;
+							break;
+
+						} else if (dealer.getPlayerHandValue() > 21) {
+							System.out.println("Player busted! Dealer wins!");
+							dealer.dealerWins++;
+							keepGoing = false;
+							break;
+
+						}
+					}
+					if (userChoice == 2) {
+						System.out.println();
+						System.out.println("You stand.");
+						System.out.println();
+						System.out.println(dealer.displayDealerCards());
+						System.out.println(dealer.displayDealerSecondCard());
 						keepGoing = false;
 						break;
+
 					}
-					if (dealer.getPlayerHandValue() > 21) {
-						System.out.println("You busted! Dealer wins!");
-						dealer.dealerWins++;
-						keepGoing = false;
-						break;
-					}
-				}
-				if (userChoice == 2) {
-					System.out.println();
-					System.out.println("You stand.");
-					System.out.println();
+				} catch (InputMismatchException f) {
+					System.err.println("Please enter (1) for HIT, type (2) for STAND:  " + f);
+					sc.nextLine();
+					userChoice = sc.nextInt();
+					sc.nextLine();
+
+				} finally {
 					keepGoing = false;
-					break;
 				}
-			} catch (InputMismatchException f) {
-				System.err.println("Please enter (1) for HIT, type (2) for STAND:  " + f);
-				keepGoing = false;
-				break;
-			} finally {
-				keepGoing = false;
 			}
 		}
+
 	}
 
 	public void dealersTurn() {
@@ -106,30 +132,51 @@ public class BlackjackApp {
 		boolean keepGoing = true;
 		while (keepGoing) {
 			System.out.println();
-			System.out.println(dealer.displayDealerCards());
-			System.out.println(dealer.displayDealerSecondCard());
-			while (dealer.getDealerHandValue() < 17) {
-				System.out.println();
-				Card newCard = dealer.dealCard();
-				dealer.addDealerCard(newCard);
-				System.out.println("Dealers new card: " + newCard + " - Value of " + newCard.getValue());
-				System.out.println("Dealers total: " + dealer.getDealerHandValue());
-				if (dealer.getDealerHandValue() == 21) {
-					System.out.println("Blackjack! Dealer win!");
-					dealer.dealerWins++;
-					keepGoing = false;
-					break;
-				}
-				if (dealer.getDealerHandValue() > 21) {
-					System.out.println("\nDealer busted! Player wins!");
-					player.playerWins++;
-					keepGoing = false;
-					break;
-				}
+			if (dealer.getPlayerHandValue() == 21) {
+				keepGoing = false;
+				break;
 			}
-			while (dealer.getDealerHandValue() < 21) {
+			if (dealer.getPlayerHandValue() > 21) {
+				keepGoing = false;
+				break;
+			}
+			if (dealer.getDealerHandValue() == 21) {
+				keepGoing = false;
+				break;
+			}
+			if (dealer.getDealerHandValue() > 21) {
+				keepGoing = false;
+				break;
+			}
+			while (dealer.getDealerHandValue() < 21 && keepGoing) {
+				if (dealer.getDealerHandValue() < 17) {
+					System.out.println();
+					Card newCard = dealer.dealCard();
+					dealer.addDealerCard(newCard);
+					System.out.println("Dealers new card: " + newCard + " - Value of " + newCard.getValue());
+					System.out.println("Dealers total: " + dealer.getDealerHandValue());
+					if (dealer.getDealerHandValue() == 21) {
+						System.out.println("Blackjack! Dealer wins!");
+						dealer.dealerWins++;
+						keepGoing = false;
+						break;
+
+					} else if (dealer.getDealerHandValue() > 21) {
+						System.out.println("Dealer busted! Player wins!");
+						player.playerWins++;
+						keepGoing = false;
+						break;
+
+					}
+				}
 				if (dealer.getDealerHandValue() >= 17 && dealer.getDealerHandValue() < 21) {
-					if (dealer.getDealerHandValue() < dealer.getPlayerHandValue()) {
+					if (dealer.getPlayerHandValue() == dealer.getDealerHandValue()) {
+						System.out.println("Players total: \t" + dealer.getPlayerHandValue());
+						System.out.println("Wow! Its a tie!");
+						keepGoing = false;
+						break;
+
+					} else if (dealer.getDealerHandValue() < dealer.getPlayerHandValue()) {
 						System.out.println();
 						System.out.println("Dealer stands.");
 						System.out.println();
@@ -139,8 +186,8 @@ public class BlackjackApp {
 						player.playerWins++;
 						keepGoing = false;
 						break;
-					}
-					if (dealer.getDealerHandValue() > dealer.getPlayerHandValue()) {
+
+					} else if (dealer.getDealerHandValue() > dealer.getPlayerHandValue()) {
 						System.out.println();
 						System.out.println("Dealer stands.");
 						System.out.println();
@@ -150,10 +197,8 @@ public class BlackjackApp {
 						dealer.dealerWins++;
 						keepGoing = false;
 						break;
-					}
 
-					if (dealer.getDealerHandValue() == dealer.getPlayerHandValue()) {
-						System.out.println();
+					} else if (dealer.getDealerHandValue() == dealer.getPlayerHandValue()) {
 						System.out.println();
 						System.out.println("Dealer stands.");
 						System.out.println();
@@ -162,35 +207,59 @@ public class BlackjackApp {
 						System.out.println("\nWow...Its a tie!");
 						keepGoing = false;
 						break;
+
+					} else {
+						System.out.println();
+						Card newCard = dealer.dealCard();
+						dealer.addDealerCard(newCard);
+						System.out.println("Dealers new card: " + newCard + " - Value of " + newCard.getValue());
+						System.out.println("Dealers total: " + dealer.getDealerHandValue());
+						if (dealer.getDealerHandValue() == 21) {
+							System.out.println("Blackjack! Dealer wins!");
+							dealer.dealerWins++;
+							keepGoing = false;
+							break;
+
+						}
+						if (dealer.getDealerHandValue() > 21) {
+							System.out.println("\nDealer busted! Player wins!");
+							player.playerWins++;
+							keepGoing = false;
+							break;
+
+						}
 					}
 				}
 			}
+
 		}
 	}
 
 	public void rematch() throws InterruptedException {
-		int choice = 0;
+		int userChoice = 1;
 		try {
 			System.out.println();
-			System.out.println("Total score:\n " + "\n[  " + player.getPlayerWins() + " player  ]\n[  "
+			System.out.println("Total wins:\n " + "\n[  " + player.getPlayerWins() + " player  ]\n[  "
 					+ dealer.dealerWins + " dealer  ]");
 			System.out.println();
 			System.out.println("Play Again? (1) for YES, (2) for NO.");
-			choice = sc.nextInt();
-			if (choice == 1) {
-				player.resetPlayerHand();
+			userChoice = sc.nextInt();
+			sc.nextLine();
+			if (userChoice == 1) {
+				dealer.resetPlayerHand();
 				dealer.resetDealerHand();
+				dealer.createNewDeck();
 				startGame();
 			}
-			if (choice == 2) {
+			if (userChoice == 2) {
 				System.out.println("Goodbye!");
 				sc.close();
 				System.exit(0);
 			}
 		} catch (InputMismatchException e) {
 			System.err.println("Play Again? (1) for YES, (2) for NO:  " + e);
-			System.exit(0);
+			userChoice = sc.nextInt();
+			sc.nextLine();
 		}
 	}
-
 }

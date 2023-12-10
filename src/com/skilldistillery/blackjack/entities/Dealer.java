@@ -14,6 +14,10 @@ public class Dealer extends Player {
 		return newCard;
 	}
 
+	public void createNewDeck() {
+		deck = new Deck();
+	}
+
 	public void shuffleDeck() throws InterruptedException {
 		for (int i = 0; i < 3; i++) {
 			deck.shuffleDeck();
@@ -35,17 +39,17 @@ public class Dealer extends Player {
 		addPlayerCard(card1);
 		addPlayerCard(card2);
 		System.out.println("Players first card: " + card1 + " - Value of " + card1.getValue());
+
 		System.out.println("Players second card: " + card2 + " - Value of " + card2.getValue());
-		System.out.println("Players total: " + getPlayerHandValue());
 
 		Card card3 = dealCard();
 		Card card4 = dealCard();
 		addDealerCard(card3);
 		addDealerCard(card4);
 		System.out.println();
-
 		System.out.println(displayDealerSecondCard());
 		System.out.println();
+		System.out.println("Players total: " + getPlayerHandValue());
 	}
 
 	public Card addDealerCard(Card card) {

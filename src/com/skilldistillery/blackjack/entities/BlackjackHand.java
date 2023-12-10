@@ -4,20 +4,34 @@ import java.util.List;
 
 public class BlackjackHand extends Hand {
 
-	protected int dealerWins = 0;
-	List<Card> dealerCurrentCards = myCards;
-
-	public List<Card> CardsInHand(Card Card) {
-		myCards.add(Card);
-		return myCards;
+	public static String viewCards(List<Card> currentCards) {
+		String thisCard = "";
+		for (Card card : currentCards) {
+			thisCard = card.toString() + " - Value of " + card.getValue();
+		}
+		return thisCard;
 	}
 
-	public String viewCards(List<Card> dealerCurrentCards) {
-		String name = "";
-		for (Card card : dealerCurrentCards) {
-			name = card.toString();
-		}
-		return name;
+//	public boolean isBlackJack() {
+//		if (getHandValue() == 21) {
+//			System.out.println("Blackjack!");
+//		}
+//		return true;
+//	}
+//
+//	public boolean isBust() {
+//		if (getHandValue() > 21) {
+//			System.out.println("Bust!");
+//		}
+//		return true;
+//	}
 
+	@Override
+	public int getHandValue() {
+		int total = 0;
+		for (Card card : cardsInHand) {
+			total += card.getValue();
+		}
+		return total;
 	}
 }

@@ -35,7 +35,7 @@ public class Card {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("").append(rank).append(" of ").append(suit).append(".");
+		builder.append("").append(rank).append(" of ").append(suit).append("");
 		return builder.toString();
 	}
 }

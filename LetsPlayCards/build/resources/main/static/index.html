@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blackjack Game</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/card-styles.css">
+<!-- Ensure this CSS properly styles the .card elements -->
+</head>
+<body>
+	<audio id="background-music" loop>
+		<source src="css/music.mp3" type="audio/mpeg">
+	</audio>
+	<audio id="cardSound" src="css/dealing.mp3" preload="auto"></audio>
+	<audio id="winSound" src="css/win.mp3" preload="auto"></audio>
+
+	<div id="card-games-container">
+		<div id="blackjack-game" class="card-game">
+			<h1>Blackjack 21</h1>
+			<div id="dealer-area">
+				<h2>Dealer's Hand</h2>
+				<div class="cards" id="dealer-cards"></div>
+				<div class="total" id="dealer-total">Total: 0</div>
+			</div>
+			<div id="player-area">
+				<h2>Player's Hand</h2>
+				<div class="cards" id="player-cards"></div>
+				<div class="total" id="player-total">Total: 0</div>
+			</div>
+			<div id="controls">
+				<button id="hitButton">Hit</button>
+				<button id="standButton">Stand</button>
+				<button id="newGameButton">New Game</button>
+			</div>
+			<div id="status-container">
+    <div id="status-messages"></div>
+    <div id="record"></div>
+</div>
+
+		</div>
+	</div>
+
+	<script src="game.js"></script>
+</body>
+</html>

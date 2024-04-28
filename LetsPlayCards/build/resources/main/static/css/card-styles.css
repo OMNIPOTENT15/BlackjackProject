@@ -1,0 +1,45 @@
+/* #card-games-container {
+	display: flex;
+	justify-content: space-around;
+}
+
+.card-game {
+	flex: 1;
+	margin: 20px;
+	padding: 20px;
+	border-radius: 8px;
+	background-color: #20232a;
+	max-width: 600px;
+}
+
+.card {
+	width: 60px;
+	height: 80px;
+	margin: 5px;
+	padding: 5px;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background-color: #fff;
+	border-radius: 5px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+	font-size: 14px;
+	color: #333;
+	display: inline-block;  
+    margin-right: 10px;  
+}
+.cards {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: start;
+}
+
+.card .value {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.card .suit {
+	font-size: 20px;
+} */

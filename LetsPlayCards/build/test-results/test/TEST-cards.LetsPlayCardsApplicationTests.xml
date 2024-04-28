@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="cards.LetsPlayCardsApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-04-27T03:40:25" hostname="Blakes-Air" time="1.894">
+  <properties/>
+  <testcase name="contextLoads()" classname="cards.LetsPlayCardsApplicationTests" time="1.894"/>
+  <system-out><![CDATA[20:40:21.934 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [cards.LetsPlayCardsApplicationTests]: LetsPlayCardsApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+20:40:22.249 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration cards.LetsPlayCardsApplication for test class cards.LetsPlayCardsApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.5)
+
+2024-04-26T20:40:23.120-07:00  INFO 21590 --- [LetsPlayCards] [    Test worker] cards.LetsPlayCardsApplicationTests      : Starting LetsPlayCardsApplicationTests using Java 17.0.9 with PID 21590 (started by blakevieyra in /Users/blakevieyra/SD/Java/workspace/BlackJackProject/LetsPlayCards)
+2024-04-26T20:40:23.124-07:00  INFO 21590 --- [LetsPlayCards] [    Test worker] cards.LetsPlayCardsApplicationTests      : No active profile set, falling back to 1 default profile: "default"
+2024-04-26T20:40:25.591-07:00  INFO 21590 --- [LetsPlayCards] [    Test worker] cards.LetsPlayCardsApplicationTests      : Started LetsPlayCardsApplicationTests in 2.994 seconds (process running for 5.775)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

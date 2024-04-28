@@ -1,7 +1,7 @@
 
 ---
 
-# Blackjack Game by Blake Vieyra
+# Blackjack 21 by Blake Vieyra
 
 ## Description
 

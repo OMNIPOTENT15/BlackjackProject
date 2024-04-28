@@ -7,6 +7,8 @@
 
 This is a web-based Blackjack game implemented using HTML, CSS, JavaScript, and Spring Boot framework for the backend. The game allows users to play Blackjack against a computer dealer. It provides features such as hitting, standing, starting a new game, and viewing game statistics.
 
+![Screen Shot 2024-04-27 at 8 08 21 PM](https://github.com/blakevieyra/BlackjackProject/assets/88246090/ff095681-e2c4-4abd-8bf3-5dcdd4b44156)
+
 Deployed AWS EC2 URL: http://blackjack21.blake-vieyra.com/
 
 ## Technologies Used
